@@ -8,3 +8,6 @@ test.o: test.cpp
 
 clean:
 	rm -rf bin/test test.o
+
+test:
+	./test
