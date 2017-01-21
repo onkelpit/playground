@@ -1,10 +1,21 @@
-all: test
+CC = g++
+OBJECTS = test.o
+LIBS =
+CFLAGS = -Wall -O2
+BINDIR = $(DESTDIR)/usr/bin
+NAME = test
 
-test: test.o
-	g++ -o test test.o
+test: $(OBJECTS)
+        $(CC) -o $(NAME) $(OBJECTS) $(LIBS)
 
-test.o: test.cpp
-	g++ -c -o test.o test.cpp
+%.o: %.c
+        $(CC) -c $(CFLAGS) $<
+
+install:
+        install --mode=755 $(NAME) $(BINDIR)/
 
 clean:
-	rm -rf bin/test test.o
+        rm *.o $(NAME)
+
+uninstall:
+        rm $(BINDIR)/$(NAME)
